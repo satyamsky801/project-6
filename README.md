@@ -28,6 +28,8 @@ The dashboard presents business data through interactive visualizations, KPIs, c
 
 ### TATA Data Visualization Dashboard
 
+![TATA Data Visualization Dashboard](./assets/screenshot.png)
+
 **Dashboard Overview:**  
 This dashboard provides a clear visual summary of the TATA data visualization project.  
 It presents important business metrics and charts for understanding overall performance.  
