@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "TATA DATA VISULIZATION PROJECT"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "b5afea7c-7c5b-4e21-ad5a-8cbcb2e70b16"
+  }
+}

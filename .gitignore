@@ -1,0 +1,4 @@
+﻿localSettings.json
+*.local.json
+cache.abf
+*.pbix

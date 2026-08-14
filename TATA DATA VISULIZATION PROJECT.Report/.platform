@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "TATA DATA VISULIZATION PROJECT"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "d2447da0-47ec-4b6f-b624-a17880e0033e"
+  }
+}

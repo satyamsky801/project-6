@@ -1,0 +1,100 @@
+table 'Online Retail'
+	lineageTag: da6c8c6d-45a5-406e-985f-d2e6f3e48b67
+
+	measure Revenue = ```
+			
+			SUMX ('Online Retail','Online Retail'[Quantity]*'Online Retail'[UnitPrice]
+			)
+			 
+			```
+		lineageTag: d6442fd7-045e-4262-9b5f-718c90e08460
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column InvoiceNo
+		dataType: string
+		lineageTag: 6c34ea26-7ee7-4014-ae14-919061b0f1e4
+		summarizeBy: none
+		sourceColumn: InvoiceNo
+
+		annotation SummarizationSetBy = Automatic
+
+	column StockCode
+		dataType: string
+		lineageTag: 18222c1b-7565-4143-87c6-889a4a470e84
+		summarizeBy: none
+		sourceColumn: StockCode
+
+		annotation SummarizationSetBy = Automatic
+
+	column Description
+		dataType: string
+		lineageTag: f7c7ab62-9afd-4043-8e3f-3a4f6fb17b51
+		summarizeBy: none
+		sourceColumn: Description
+
+		annotation SummarizationSetBy = Automatic
+
+	column Quantity
+		dataType: int64
+		formatString: 0
+		lineageTag: 281a6b1e-0073-426b-b2a8-585cf2475253
+		summarizeBy: sum
+		sourceColumn: Quantity
+
+		annotation SummarizationSetBy = Automatic
+
+	column InvoiceDate
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 4d5a29a9-6a93-4083-9006-2588aca7b8a4
+		summarizeBy: none
+		sourceColumn: InvoiceDate
+
+		variation Variation
+			isDefault
+			relationship: b75d9147-d34e-47dc-9299-aba4bbfc7857
+			defaultHierarchy: LocalDateTable_0303ea3a-b152-4f7c-9cf6-170c3f8372d2.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column UnitPrice
+		dataType: double
+		lineageTag: 8a4b9f5b-6bd9-40e8-8c04-45189f20717f
+		summarizeBy: sum
+		sourceColumn: UnitPrice
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CustomerID
+		dataType: int64
+		formatString: 0
+		lineageTag: 781cf453-3994-44dd-8bd4-0097e996a787
+		summarizeBy: count
+		sourceColumn: CustomerID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Country
+		dataType: string
+		lineageTag: 4d5094b6-23ae-4c57-afca-c1484eea2ba0
+		summarizeBy: none
+		sourceColumn: Country
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Online Retail' = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\satya\Downloads\Online Retail Data Set.xlsx"), null, true),
+				    #"Online Retail_Sheet" = Source{[Item="Online Retail",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(#"Online Retail_Sheet", [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"InvoiceNo", type any}, {"StockCode", type any}, {"Description", type text}, {"Quantity", Int64.Type}, {"InvoiceDate", type datetime}, {"UnitPrice", type number}, {"CustomerID", Int64.Type}, {"Country", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+
